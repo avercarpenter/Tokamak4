@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Obstacle1 : MonoBehaviour
+public class Obstacle2 : MonoBehaviour
 {
     public float startSpeed = 5f;
     public float acceleration = 1f;
@@ -21,6 +21,7 @@ public class Obstacle1 : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Player")) {
             gameManager.GameOver();
+            Debug.Log("ded");
         }
         else if (other.CompareTag("LeftBoundary")) {
             Destroy(gameObject);
