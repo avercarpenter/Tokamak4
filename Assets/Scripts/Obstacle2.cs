@@ -18,12 +18,9 @@ public class Obstacle2 : MonoBehaviour
     }
 
 
-    void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag("Player")) {
-            gameManager.GameOver();
-            Debug.Log("ded");
-        }
-        else if (other.CompareTag("LeftBoundary")) {
+    void OnTriggerEnter2D(Collider2D other) 
+    {
+             if (other.CompareTag("LeftBoundary")) {
             Destroy(gameObject);
         }
     }

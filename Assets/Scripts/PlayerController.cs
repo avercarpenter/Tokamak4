@@ -15,12 +15,14 @@ public class PlayerController : MonoBehaviour
     private Vector2 screenBounds;
     private float playerWidth;
     private float playerHeight;
+    private GameManager gameManager;
 
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        gameManager = GameObject.FindObjectOfType<GameManager>();
 
         mainCamera = Camera.main;
         screenBounds = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.transform.position.z));
@@ -51,5 +53,14 @@ public class PlayerController : MonoBehaviour
         viewPos.x = Mathf.Clamp(viewPos.x, screenBounds.x * -1 + playerWidth, screenBounds.x - playerWidth);
         viewPos.y = Mathf.Clamp(viewPos.y, screenBounds.y * -1 + playerHeight, screenBounds.y - playerHeight);
         transform.position = viewPos;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("DeathBoundary"))
+        {
+            Debug.Log("ded");
+            gameManager.GameOver();
+        }
     }
 }
