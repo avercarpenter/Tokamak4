@@ -31,18 +31,10 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-       // moveVelocity = moveInput.normalized * speed; 
-
-    }
-
     void FixedUpdate()
     {
-        float hozMovement = Input.GetAxis("Horizontal");
-        float verMovement = Input.GetAxis("Vertical");
+        float hozMovement = Input.GetAxisRaw("Horizontal");
+        float verMovement = Input.GetAxisRaw("Vertical");
 
         rb.AddForce(new Vector2(hozMovement * speed, verMovement * speed));
     }

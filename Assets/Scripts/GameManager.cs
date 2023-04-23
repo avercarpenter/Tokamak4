@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public List<GameObject> obstaclePrefabs;
-    public GameObject spawnPoint;
+     public Transform[] spawnPoints;
 
     public float spawnInterval = 2f;
     public float spawnDelay = 2f;
@@ -21,8 +21,9 @@ public class GameManager : MonoBehaviour
     {
         int index = Random.Range(0, obstaclePrefabs.Count);
         GameObject obstaclePrefab = obstaclePrefabs[index];
-        GameObject obstacle = Instantiate(obstaclePrefab);
-        obstacle.transform.position = spawnPoint.transform.position;
+
+        int spawnIndex = Random.Range(0, spawnPoints.Length);
+        GameObject obstacle = Instantiate(obstaclePrefab, spawnPoints[spawnIndex].transform.position, Quaternion.identity);
     }
 
     public void GameOver()
