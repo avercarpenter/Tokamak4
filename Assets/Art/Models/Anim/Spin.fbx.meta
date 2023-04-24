@@ -6,7 +6,17 @@ ModelImporter:
   - first:
       74: -6333163131637793548
     second: Spin
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert2
+    second: {fileID: 2100000, guid: 6b57822721978fb4a815dd0c1bab57d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert3
+    second: {fileID: 2100000, guid: 6b57822721978fb4a815dd0c1bab57d2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

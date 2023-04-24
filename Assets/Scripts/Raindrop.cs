@@ -5,35 +5,29 @@ using UnityEngine;
 public class Raindrop : MonoBehaviour
 {
 
-    public float speed; 
+    // public float speed = 10f;
+    // public Vector2 constantForce = new Vector2(0, -10f); // set the constant force to affect gravity in the y direction
 
-    private Rigidbody2D rb; 
-    private Vector2 moveVelocity; 
+    // private Rigidbody2D rb;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
+    // void Start()
+    // {
+    //     rb = GetComponent<Rigidbody2D>();
+    //     rb.constraints = RigidbodyConstraints2D.FreezeRotation; // freeze rotation to prevent unwanted rotation
 
-    void Update()
-    {
-        Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        moveVelocity = moveInput.normalized * speed; 
-           
-            // Apply wind force if player is in fan's trigger collider
-        Wind fanController = FindObjectOfType<Wind>(); // Get reference to the FanController script
-        if (fanController != null && fanController.IsInTriggerZone(transform.position))
-        {
-            Vector2 windDirection = fanController.transform.position - transform.position;
-            rb.AddForce(windDirection.normalized * fanController.windStrength);
-        }
-    }
-    
+    //     ConstantForce2D cf2D = gameObject.AddComponent<ConstantForce2D>(); // add the ConstantForce2D component to the player
+    //     cf2D.force = constantForce; // set the force to the desired constant force
+    // }
 
-    
-    void FixedUpdate()
-    {
-        rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
-    }
+    // void FixedUpdate()
+    // {
+    //     float horizontalInput = Input.GetAxisRaw("Horizontal");
+    //     Vector2 movement = new Vector2(horizontalInput * speed, rb.velocity.y);
+    //     rb.velocity = movement;
+    // }
 }
+
+
+
+
+

@@ -20,4 +20,12 @@ public class Clouds : MonoBehaviour
         Vector2 movement = new Vector2(horizontalMovement, 0f);
         rb.MovePosition(rb.position + movement);
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }
