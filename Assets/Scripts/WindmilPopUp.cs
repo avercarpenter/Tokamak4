@@ -22,7 +22,7 @@ public class WindmilPopUp : MonoBehaviour
     {
         Time.timeScale = 1f; // Resume the game
         popup.SetActive(false); // Hide the popup box
-        Destroy(gameObject); // Destroy the popup box game object
+        Destroy(this.gameObject); // Destroy the popup box game object
     }
 
 }

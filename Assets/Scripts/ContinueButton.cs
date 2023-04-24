@@ -9,14 +9,10 @@ public class ContinueButton : MonoBehaviour
 
     public void ContinueGame()
     {
-        Time.timeScale = 1f;
+        
         popupBox.SetActive(false);
         gameObject.SetActive(false);
+        Time.timeScale = 1f;
     }
-    public void OnContinueButtonClicked()
-    {
-        Time.timeScale = 1f; // Resume the game
-       // popupBox.SetActive(false); // Hide the popup box
-      //  Destroy(gameObject); // Destroy the popup box game object
-    }
+
 }
