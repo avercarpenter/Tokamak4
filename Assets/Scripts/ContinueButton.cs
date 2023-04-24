@@ -5,12 +5,14 @@ using UnityEngine.UI;
 
 public class ContinueButton : MonoBehaviour
 {
-    public GameObject popupBox;
+    public GameObject windPopupBox;
+    public GameObject solarPopupBox;
 
     public void ContinueGame()
     {
         
-        popupBox.SetActive(false);
+        windPopupBox.SetActive(false);
+        solarPopupBox.SetActive(false);
         gameObject.SetActive(false);
         Time.timeScale = 1f;
     }

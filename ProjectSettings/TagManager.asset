@@ -8,6 +8,7 @@ TagManager:
   - Boundaries
   - Obsticles
   - DeathBoundary
+  - Ice
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - LeftBound
   - Obsticles
   - DeathBoundary
-  - 
+  - Player
   - 
   - 
   - 

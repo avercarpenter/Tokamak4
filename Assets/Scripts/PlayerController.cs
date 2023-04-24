@@ -17,12 +17,15 @@ public class PlayerController : MonoBehaviour
     private float playerHeight;
     private GameManager gameManager;
 
+    private Animator anim; 
+
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         gameManager = GameObject.FindObjectOfType<GameManager>();
+        anim = GetComponent<Animator>();
 
         mainCamera = Camera.main;
         screenBounds = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.transform.position.z));
@@ -53,6 +56,12 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("ded");
             gameManager.GameOver();
+        }
+
+        if (other.CompareTag("Ice"))
+        {
+            Debug.Log("Frozen");
+            anim.SetBool("Frozen", true);
         }
     }
 }

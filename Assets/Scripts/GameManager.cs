@@ -12,6 +12,15 @@ public class GameManager : MonoBehaviour
 
     private bool isGameOver = false;
 
+    // The time at which to switch to a single obstacle prefab
+    public float singleObstacleTime = 30f;
+
+    // The obstacle prefab to spawn after the switch time
+    public GameObject singleObstaclePrefab;
+
+    // The obstacle prefab to be used for single obstacle spawning
+    public GameObject singleObstacle;
+
     void Start()
     {
         InvokeRepeating("SpawnObstacle", spawnDelay, spawnInterval);
@@ -19,11 +28,18 @@ public class GameManager : MonoBehaviour
 
     void SpawnObstacle()
     {
-        int index = Random.Range(0, obstaclePrefabs.Count);
-        GameObject obstaclePrefab = obstaclePrefabs[index];
-
-        int spawnIndex = Random.Range(0, spawnPoints.Length);
-        GameObject obstacle = Instantiate(obstaclePrefab, spawnPoints[spawnIndex].transform.position, Quaternion.identity);
+        // Check if the current game time has passed the switch time
+        if (Time.time >= singleObstacleTime)
+        {
+            // Spawn the single obstacle prefab
+            Instantiate(singleObstacle, spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position, Quaternion.identity);
+        }
+        else
+        {
+            // Spawn a random obstacle prefab from the list
+            GameObject obstaclePrefab = obstaclePrefabs[Random.Range(0, obstaclePrefabs.Count)];
+            Instantiate(obstaclePrefab, spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position, Quaternion.identity);
+        }
     }
 
     public void GameOver()

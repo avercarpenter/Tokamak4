@@ -5,40 +5,28 @@ using UnityEngine;
 public class Wind : MonoBehaviour
 {
 
-    public float windStrength = 10f;
+    public float windForce = 50f;
+    public float windDuration = 3f;
 
-    private void OnTriggerStay2D(Collider2D other)
+    private bool isActive = false;
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            Rigidbody2D otherRb = other.GetComponent<Rigidbody2D>();
-            if (otherRb != null)
-            {
-                Vector2 windDirection = transform.right; // Change this to adjust the direction of the wind
-                otherRb.AddForce(windDirection * windStrength);
-            }
+            isActive = true;
+            StartCoroutine(StopWind());
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private IEnumerator StopWind()
     {
-        if (other.CompareTag("Player"))
-        {
-            Rigidbody2D otherRb = other.GetComponent<Rigidbody2D>();
-            if (otherRb != null)
-            {
-                otherRb.velocity = Vector2.zero; // Reset the player's velocity when they leave the fan's trigger zone
-            }
-        }
+        yield return new WaitForSeconds(windDuration);
+        isActive = false;
     }
 
-    public bool IsInTriggerZone(Vector2 position)
+    public bool IsActive()
     {
-        Collider2D triggerCollider = GetComponent<Collider2D>();
-        if (triggerCollider != null)
-        {
-            return triggerCollider.OverlapPoint(position);
-        }
-        return false;
+        return isActive;
     }
 }
