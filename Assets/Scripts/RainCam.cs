@@ -4,39 +4,41 @@ using UnityEngine;
 
 public class RainCam : MonoBehaviour
 {
+   public Transform playerTransform; // Reference to the player transform
+    public float yOffset; // Offset in the y direction between the camera and the player
+    public float minYPosition; // The minimum y position of the camera
+    public float maxYPosition; // The maximum y position of the camera
+    public float transitionYPosition; // The y position at which the camera should start following horizontal movement
+    public float xOffset; // Offset in the x direction between the camera and the player after transition
 
-    public Transform player;
-    public float verticalSpeed = 5f;
-    public float diagonalSpeed = 5f;
-    public Transform diagonalStartMarker;
-    public Transform diagonalEndMarker;
-    //public float verticleLimit = 10f;
-    public Vector2 verticalOffset = new Vector2(0f, 2f);
+    private bool followHorizontal; // Flag indicating whether the camera should follow horizontal movement
 
-    private bool followPlayer = true;
-
-    private void LateUpdate()
+    // LateUpdate is called after all other Update functions have been called
+    void LateUpdate()
     {
-        Vector3 targetPosition = new Vector3(player.position.x, player.position.y, transform.position.z);
+        // Get the current position of the camera
+        Vector3 newPos = transform.position;
 
-        // Check if the player has reached the diagonal start marker
-        if (followPlayer && targetPosition.y <= diagonalStartMarker.position.y)
+        // Follow the player's vertical movement
+        newPos.y = playerTransform.position.y + yOffset;
+
+        // Check if the camera has reached the transition y position
+        if (newPos.y >= transitionYPosition)
         {
-            followPlayer = false;
+            followHorizontal = true;
         }
 
-        // If not following player, move diagonally towards end marker
-        if (!followPlayer)
+        // Follow the player's horizontal movement if necessary
+        if (followHorizontal)
         {
-            float step = diagonalSpeed * Time.deltaTime;
-            Vector3 targetDiagonal = new Vector3(diagonalEndMarker.position.x, diagonalEndMarker.position.y, transform.position.z);
-            transform.position = Vector3.MoveTowards(transform.position, targetDiagonal, step);
+            newPos.x = playerTransform.position.x + xOffset;
         }
-        // If following player, move vertically towards player
-        else
-        {
-            Vector3 targetVertical = new Vector3(targetPosition.x + verticalOffset.x, targetPosition.y + verticalOffset.y, transform.position.z);
-            transform.position = Vector3.MoveTowards(transform.position, targetVertical, verticalSpeed * Time.deltaTime);
-        }
+
+        // Clamp the camera's y position to the minimum and maximum values
+        newPos.y = Mathf.Clamp(newPos.y, minYPosition, maxYPosition);
+
+        // Set the new position of the camera
+        transform.position = newPos;
     }
 }
+

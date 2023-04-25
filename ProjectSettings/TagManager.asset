@@ -9,6 +9,7 @@ TagManager:
   - Obsticles
   - DeathBoundary
   - Ice
+  - WindZone
   layers:
   - Default
   - TransparentFX
